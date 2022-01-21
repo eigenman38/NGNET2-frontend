@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -26,7 +26,19 @@ import { weatherForecastReducer } from './state/weather-forecast.reducer';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer })
+    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+      autoPause: true,
+      features: {
+        pause: false,
+        lock: true,
+        persist: true
+      }
+    })
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
