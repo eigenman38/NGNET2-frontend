@@ -26,7 +26,7 @@ import { weatherForecastReducer } from './state/weather-forecast.reducer';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ weatherForecastReducer })
+    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
