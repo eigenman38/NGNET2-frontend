@@ -8,16 +8,15 @@ import { selectWeatherForecastData } from '../state/weather-forecast.selectors';
 
 
 @Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  selector: 'app-weather-forecast-data',
+  templateUrl: './weather-forecast-data.component.html'
 })
-export class FetchDataComponent implements OnInit {
+export class WeatherForecastDataComponent implements OnInit {
 
 
   public weatherForecastData$ = this.store.select(selectWeatherForecastData);
 
 
-  public forecasts: WeatherForecastData[] = [];
 
 
 
