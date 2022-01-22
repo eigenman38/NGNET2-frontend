@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { WeatherForecastData } from '../models/weather-forecast-data';
-import { GetWeatherForecastDataService } from '../services/getWeatherForecastData.service';
+import { GetWeatherForecastDataService } from '../services/get-weather-forecast-data.service';
 import { AppState } from '../state/app.state';
-import { getWeatherForecastData } from '../state/weather-forecast.actions';
+import { retrievedWeatherForecastData } from '../state/weather-forecast.actions';
 import { selectWeatherForecastData } from '../state/weather-forecast.selectors';
 
 
@@ -26,7 +26,7 @@ export class WeatherForecastDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getWeatherForecastDataService.execute().subscribe(x => this.store.dispatch(getWeatherForecastData({ weatherForecastData: x })));
+    this.getWeatherForecastDataService.execute().subscribe(x => this.store.dispatch(retrievedWeatherForecastData({ weatherForecastData: x })));
   }
 }
 

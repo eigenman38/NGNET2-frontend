@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { weatherForecastReducer } from './state/weather-forecast.reducer';
 import { WeatherForecastDataComponent } from './weather-forecast-data/weather-forecast-data.component';
+import { EffectsModule } from '@ngrx/effects';
+import { LogApiCallEffect } from './effects/log-api-call.effect';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { WeatherForecastDataComponent } from './weather-forecast-data/weather-fo
         lock: true,
         persist: true
       }
-    })
+    }),
+    EffectsModule.forRoot([LogApiCallEffect])
 
 
   ],

@@ -1,8 +1,15 @@
 import { createAction, props } from "@ngrx/store";
 import { WeatherForecastData } from "../models/weather-forecast-data";
 
-export const getWeatherForecastData = createAction(
+export const retrievedWeatherForecastData = createAction(
 
-    '[Weather Forecast] Fetch Weather Forecast',
+    '[Weather Forecast]  Weather Forecast Retrieved',
     props<{ weatherForecastData: WeatherForecastData[] }>()
-)
+);
+
+
+export const logApiCall = createAction(
+
+    '[Log]  Log Api Call',
+    props<{ value: string }>()
+);
