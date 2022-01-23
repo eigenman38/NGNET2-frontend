@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of, Observable, tap } from 'rxjs';
-import { WeatherForecastData } from '../models/weather-forecast-data';
+import { Observable, tap } from 'rxjs';
 import { AppState } from '../state/app.state';
+import { WeatherForecastData } from '../models/weather-forecast-data';
 import { logApiCall } from '../state/weather-forecast.actions';
+import { LogApiData } from '../models/log-api-data';
 
 @Injectable({ providedIn: 'root' })
 export class GetWeatherForecastDataService {
@@ -14,9 +15,18 @@ export class GetWeatherForecastDataService {
 
     execute(): Observable<WeatherForecastData[]> {
 
+
+
         return this.httpClient.get<WeatherForecastData[]>(this.baseUrl + 'weatherforecast').
             pipe(tap(x => {
-                this.store.dispatch(logApiCall({ value: `${this.baseUrl}weatherforecast returned ${x?.length} records}` }));
+
+                let logApiData: LogApiData = {
+                    apiCall: `${this.baseUrl}weatherforecast returned ${x?.length} records}`,
+                    serviceThatMadeCall: `GetWeatherForecastDataService`,
+                    callerDateTime: null
+
+                }
+                this.store.dispatch(logApiCall({ logApiData }));
             }));
     }
 
