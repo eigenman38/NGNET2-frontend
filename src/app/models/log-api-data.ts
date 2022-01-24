@@ -1,5 +1,7 @@
 export interface LogApiData {
     apiCall: string;
+    recordsReturned: number;
     serviceThatMadeCall: string;
-    callerDateTime: Date | null; //investigate this
+    callerDateTime: Date;
+    success: boolean;
 }
