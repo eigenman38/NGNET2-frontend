@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, EMPTY, Observable, tap } from 'rxjs';
+import { catchError, EMPTY, Observable, of, tap } from 'rxjs';
 import { LogApiData } from '../models/log-api-data';
 import { AppState } from '../state/app.state';
 import { logApiCall } from '../state/weather-forecast.actions';
@@ -19,7 +19,7 @@ export class GetAllApiCallLogs extends GetApiBaseCallService {
         super(httpClient, store, baseUrl, 'getallapicalllogs', 'GetAllApiCallLogs');
     }
 
-    execute<LogApiData>(): Observable<LogApiData[]> {
+    execute(): Observable<LogApiData[]> {
 
         //  don't want to issue action to log this api failure since it is part of the
         // api error log system
@@ -35,6 +35,9 @@ export class GetAllApiCallLogs extends GetApiBaseCallService {
 
                 })
             );
+        return EMPTY;
     }
+
+
 
 }

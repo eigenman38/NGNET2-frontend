@@ -3,24 +3,26 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
+import { GetApiBaseCallService } from '../services/base/get-api-base-call.service';
+import { GetAllApiCallLogs } from '../services/get-all-api-call-logs.service';
 import { LogApiCallService } from '../services/log-api-call.service';
 import { AppState } from '../state/app.state';
-import { apiCallLogged, logApiCall } from '../state/weather-forecast.actions';
+import { allApiCallLogsRetrieved, apiCallLogged, logApiCall } from '../state/weather-forecast.actions';
 
 @Injectable()
-export class LogApiCallEffect {
+export class GetAllApiCallLogsEffect {
 
-    public logApiCallEffect$ = createEffect(() => this.actions$.pipe(
-        ofType(logApiCall),
+    public getAllApiCallLogs$ = createEffect(() => this.actions$.pipe(
+        ofType(apiCallLogged),
         tap(x => {
-            console.log(`LogApiCallEffect`);
+            console.log(`GetAllApiCallLogsEffect`);
 
         }),
-        mergeMap(action => this.logApiCallService.execute(action.logApiData).
+        mergeMap(action => this.getAllApiCallLogs.execute().
             pipe(
                 tap(x => {
                     if (x)
-                        this.store.dispatch(apiCallLogged());
+                        this.store.dispatch(allApiCallLogsRetrieved({ weatherForecastData: x }));
 
                 })//tap
             )//pipe
@@ -35,7 +37,7 @@ export class LogApiCallEffect {
 
     constructor(
         private actions$: Actions,
-        private logApiCallService: LogApiCallService,
+        private getAllApiCallLogs: GetAllApiCallLogs,
         private store: Store<AppState>
     ) { }
 

@@ -12,6 +12,9 @@ import { weatherForecastReducer } from './state/weather-forecast.reducer';
 import { WeatherForecastDataComponent } from './weather-forecast-data/weather-forecast-data.component';
 import { EffectsModule } from '@ngrx/effects';
 import { LogApiCallEffect } from './effects/log-api-call.effect';
+import { GetAllApiCallLogsEffect } from './effects/get-all-api-call-logs.effect';
+
+//
 
 @NgModule({
   declarations: [
@@ -36,7 +39,7 @@ import { LogApiCallEffect } from './effects/log-api-call.effect';
         persist: true
       }
     }),
-    EffectsModule.forRoot([LogApiCallEffect])
+    EffectsModule.forRoot([LogApiCallEffect, GetAllApiCallLogsEffect])
 
 
   ],
