@@ -6,16 +6,16 @@ import { AppState } from '../../state/app.state';
 export abstract class ApiBaseCallService {
 
 
-    protected logApiData: LogApiData = {
-        apiCall: this.fullApiCall,
-        recordsReturned: 0,
-        serviceThatMadeCall: this.serviceThatMadeCall,
-        callerDateTime: new Date(),
-        success: false
-    }
+    // protected logApiData: LogApiData = {
+    //     apiCall: this.fullApiCall,
+    //     recordsReturned: 0,
+    //     serviceThatMadeCall: this.serviceThatMadeCall,
+    //     callerDateTime: new Date(),
+    //     success: false
+    // }
 
     constructor(private httpClientBase: HttpClient, private storeBase: Store<AppState>,
-        private baseUrlBase: string, private apiCall: string, private serviceThatMadeCall: string) { };
+        private baseUrlBase: string, private apiCall: string, protected serviceThatMadeCall: string) { };
 
 
 

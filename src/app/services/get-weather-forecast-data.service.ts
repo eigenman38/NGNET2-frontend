@@ -26,13 +26,27 @@ export class GetWeatherForecastDataService extends ApiBaseCallService {
             pipe(
                 tap(x => {
 
-                    this.logApiData.recordsReturned = x.length;
-                    this.logApiData.success = true;
-                    this.store.dispatch(logApiCall({ logApiData: this.logApiData }));
+                    let logApiData = {
+                        apiCall: this.fullApiCall,
+                        recordsReturned: x.length,
+                        serviceThatMadeCall: this.serviceThatMadeCall,
+                        callerDateTime: new Date(),
+                        success: true
+                    }
+
+
+                    this.store.dispatch(logApiCall({ logApiData }));
                 }),
                 catchError(x => {
-                    this.logApiData.success = false;
-                    this.store.dispatch(logApiCall({ logApiData: this.logApiData }));
+
+                    let logApiData = {
+                        apiCall: this.fullApiCall,
+                        recordsReturned: 0,
+                        serviceThatMadeCall: this.serviceThatMadeCall,
+                        callerDateTime: new Date(),
+                        success: false
+                    }
+                    this.store.dispatch(logApiCall({ logApiData }));
                     return EMPTY;
                 })
             );

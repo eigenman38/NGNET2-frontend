@@ -16,7 +16,7 @@ export class GetAllApiCallLogs extends GetApiBaseCallService {
 
     constructor(private httpClient: HttpClient, private store: Store<AppState>,
         @Inject('BASE_URL') private baseUrl: string) {
-        super(httpClient, store, baseUrl, 'logapidata', 'GetAllApiCallLogs');
+        super(httpClient, store, baseUrl, 'getallapicalllogs', 'GetAllApiCallLogs');
     }
 
     execute<LogApiData>(): Observable<LogApiData[]> {

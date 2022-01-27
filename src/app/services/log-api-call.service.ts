@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
-import { LogApiData } from '../models/log-api-data';
 import { AppState } from '../state/app.state';
-import { ApiBaseCallService } from './base/api-base-call.service';
 import { PostApiBaseCallService } from './base/post-api-base-call.service';
 
 @Injectable({ providedIn: 'root' })
