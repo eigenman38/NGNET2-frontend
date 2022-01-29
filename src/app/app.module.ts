@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LogApiCallEffect } from './effects/log-api-call.effect';
 import { GetAllApiCallLogsEffect } from './effects/get-all-api-call-logs.effect';
 import { apiCallLogReducer } from './state/api-call-log.reducer';
+import { ApiCallListComponent } from './api-call-list/api-call-list.component';
 
 //
 
@@ -22,7 +23,8 @@ import { apiCallLogReducer } from './state/api-call-log.reducer';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    WeatherForecastDataComponent
+    WeatherForecastDataComponent,
+    ApiCallListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,25 @@
+<h1 id="tableLabel">Api Call List</h1>
+
+<p *ngIf="!apiCallLogs$"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="apiCallLogs$">
+    <thead>
+        <tr>
+            <th>Date Time Called</th>
+            <th>Api Call</th>
+            <th>Records Returned</th>
+            <th>Service That Made The Call</th>
+            <th>Call Successful</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let apiCallLog of apiCallLogs$ | async">
+            <td>{{ apiCallLog.callerDateTime }}</td>
+            <td>{{ apiCallLog.apiCall }}</td>
+            <td>{{ apiCallLog.recordsReturned }}</td>
+            <td>{{ apiCallLog.serviceThatMadeCall }}</td>
+            <td>{{ apiCallLog.success }}</td>
+
+        </tr>
+    </tbody>
+</table>
