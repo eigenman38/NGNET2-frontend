@@ -6,8 +6,8 @@ import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { GetApiBaseCallService } from '../services/base/get-api-base-call.service';
 import { GetAllApiCallLogs } from '../services/get-all-api-call-logs.service';
 import { LogApiCallService } from '../services/log-api-call.service';
+import { apiCallLogged, allApiCallLogsRetrieved } from '../state/api-call-log.actions';
 import { AppState } from '../state/app.state';
-import { allApiCallLogsRetrieved, apiCallLogged, logApiCall } from '../state/weather-forecast.actions';
 
 @Injectable()
 export class GetAllApiCallLogsEffect {
@@ -22,7 +22,7 @@ export class GetAllApiCallLogsEffect {
             pipe(
                 tap(x => {
                     if (x)
-                        this.store.dispatch(allApiCallLogsRetrieved({ weatherForecastData: x }));
+                        this.store.dispatch(allApiCallLogsRetrieved({ logApiData: x }));
 
                 })//tap
             )//pipe

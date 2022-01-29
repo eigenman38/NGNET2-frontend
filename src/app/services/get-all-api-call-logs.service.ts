@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, of, tap } from 'rxjs';
 import { LogApiData } from '../models/log-api-data';
 import { AppState } from '../state/app.state';
-import { logApiCall } from '../state/weather-forecast.actions';
 import { ApiBaseCallService } from './base/api-base-call.service';
 import { GetApiBaseCallService } from './base/get-api-base-call.service';
 

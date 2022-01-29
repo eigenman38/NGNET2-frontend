@@ -9,18 +9,3 @@ export const retrievedWeatherForecastData = createAction(
 );
 
 
-export const logApiCall = createAction(
-
-    '[Log]  Log Api Call',
-    props<{ logApiData: LogApiData }>()
-);
-
-export const apiCallLogged = createAction(
-    '[Log]  Api Call Logged'
-);
-
-export const allApiCallLogsRetrieved = createAction(
-
-    '[Log] All Api Call Logs Retrieved',
-    props<{ weatherForecastData: LogApiData[] }>()
-);

@@ -3,10 +3,10 @@ import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 import { AppState } from '../state/app.state';
-import { logApiCall } from '../state/weather-forecast.actions';
 import { LogApiData } from '../models/log-api-data';
 import { WeatherForecastData } from '../models/weather-forecast-data';
 import { ApiBaseCallService } from './base/api-base-call.service';
+import { logApiCall } from '../state/api-call-log.actions';
 
 @Injectable({ providedIn: 'root' })
 export class GetWeatherForecastDataService extends ApiBaseCallService {
