@@ -1,2 +1,10 @@
 <h1>Home</h1>
-<app-api-call-list></app-api-call-list>
+
+<div>
+    <button (click)="dec()" title="smaller">Home -</button>
+    <button (click)="inc()" title="bigger">Home +</button>
+    <div><label> Max Number of Rows To Display: {{ homeNumberOfRowsToDisplay }}</label></div>
+</div>
+<div>
+    <app-api-call-list [(numberOfRowsToDisplay)]="homeNumberOfRowsToDisplay"></app-api-call-list>
+</div>

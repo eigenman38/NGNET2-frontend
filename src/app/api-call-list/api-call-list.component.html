@@ -1,5 +1,11 @@
 <h1 id="tableLabel">Api Call List</h1>
 
+<div>
+    <button (click)="dec()" title="smaller">List -</button>
+    <button (click)="inc()" title="bigger">List +</button>
+    <div><label> Max Number of Rows To Display: {{ numberOfRowsToDisplay }}</label></div>
+</div>
+
 <p *ngIf="!apiCallLogs$"><em>Loading...</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="apiCallLogs$">
@@ -13,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let apiCallLog of apiCallLogs$ | async">
+        <tr *ngFor="let apiCallLog of apiCallLogs$  | async | slice:0:numberOfRowsToDisplay">
             <td>{{ apiCallLog.callerDateTime }}</td>
             <td>{{ apiCallLog.apiCall }}</td>
             <td>{{ apiCallLog.recordsReturned }}</td>
