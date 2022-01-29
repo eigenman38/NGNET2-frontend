@@ -13,6 +13,7 @@ import { WeatherForecastDataComponent } from './weather-forecast-data/weather-fo
 import { EffectsModule } from '@ngrx/effects';
 import { LogApiCallEffect } from './effects/log-api-call.effect';
 import { GetAllApiCallLogsEffect } from './effects/get-all-api-call-logs.effect';
+import { apiCallLogReducer } from './state/api-call-log.reducer';
 
 //
 
@@ -28,7 +29,7 @@ import { GetAllApiCallLogsEffect } from './effects/get-all-api-call-logs.effect'
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer }),
+    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer, allApiCallLogs: apiCallLogReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
