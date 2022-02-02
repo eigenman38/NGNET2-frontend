@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectAllApiCallLogs } from '../state/api-call-log.selectors';
 import { AppState } from '../state/app.state';
@@ -8,7 +8,7 @@ import { AppState } from '../state/app.state';
   templateUrl: './api-call-list.component.html',
   styleUrls: ['./api-call-list.component.css']
 })
-export class ApiCallListComponent implements OnInit {
+export class ApiCallListComponent implements OnInit, OnChanges {
   @Input() numberOfRowsToDisplay: number = 10;
   @Output() numberOfRowsToDisplayChange = new EventEmitter<number>();
 
@@ -16,6 +16,11 @@ export class ApiCallListComponent implements OnInit {
 
 
   constructor(private store: Store<AppState>) { }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
 
   ngOnInit(): void {
   }

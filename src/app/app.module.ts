@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { LogApiCallEffect } from './effects/log-api-call.effect';
 import { GetAllApiCallLogsEffect } from './effects/get-all-api-call-logs.effect';
 import { apiCallLogReducer } from './state/api-call-log.reducer';
 import { ApiCallListComponent } from './api-call-list/api-call-list.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { FormsHomeComponent } from './forms-home/forms-home.component';
 
 //
 
@@ -24,12 +26,15 @@ import { ApiCallListComponent } from './api-call-list/api-call-list.component';
     NavMenuComponent,
     HomeComponent,
     WeatherForecastDataComponent,
-    ApiCallListComponent
+    ApiCallListComponent,
+    ReactiveFormComponent,
+    FormsHomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({ weatherForecastData: weatherForecastReducer, allApiCallLogs: apiCallLogReducer }),
     StoreDevtoolsModule.instrument({
