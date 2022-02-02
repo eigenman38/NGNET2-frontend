@@ -11,12 +11,12 @@ export class ReactiveFormComponent implements OnInit {
 
   reactiveForm = this.formBuilder.group({
     firstName: ['', Validators.required],
-    lastName: ['', Validators.required], // Validators.minLength(5)
+    lastName: ['', [Validators.required, Validators.minLength(5)]], // Validators.minLength(5)
     address: this.formBuilder.group({
       street: [''],
       city: [''],
       state: [''],
-      zipcode: [''] // match exactly 5 digits Validators.pattern(/^\d{5}/)
+      zipcode: ['', Validators.pattern(/^\d{5}/)] // match exactly 5 digits Validators.pattern(/^\d{5}/)
     }),
     aliases: this.formBuilder.array([
       this.formBuilder.control('')
