@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   private selector: string;
 
   public homeNumberOfRowsToDisplay: number = 10;
+  public todaysDate = new Date();
 
   constructor(private elementRef: ElementRef) {
     this.selector = elementRef.nativeElement.tagName;

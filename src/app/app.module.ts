@@ -17,6 +17,7 @@ import { apiCallLogReducer } from './state/api-call-log.reducer';
 import { ApiCallListComponent } from './api-call-list/api-call-list.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { FormsHomeComponent } from './forms-home/forms-home.component';
+import { ExponentPipe } from './exponent.pipe';
 
 //
 
@@ -28,7 +29,8 @@ import { FormsHomeComponent } from './forms-home/forms-home.component';
     WeatherForecastDataComponent,
     ApiCallListComponent,
     ReactiveFormComponent,
-    FormsHomeComponent
+    FormsHomeComponent,
+    ExponentPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
