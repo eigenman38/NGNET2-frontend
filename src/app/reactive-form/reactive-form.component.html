@@ -4,8 +4,10 @@
             <h2>Reactive Form</h2>
 
             <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-                <label for="first-name">First Name: </label><span
-                    *ngIf="reactiveForm.get('firstName')?.errors?.required">Required</span>
+                <label for="first-name">First Name: </label>
+                <span *ngIf="reactiveForm.get('firstName')?.errors?.required">Required</span>
+                <span *ngIf="reactiveForm.get('firstName')?.errors?.forbiddenName">
+                    {{reactiveForm.get('firstName')?.errors?.forbiddenName.value}} Is Banned</span>
                 <input id="first-name" type="text" formControlName="firstName" required>
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class ReactiveFormComponent implements OnInit {
   states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
 
   reactiveForm = this.formBuilder.group({
-    firstName: ['', [Validators.required]],
+    firstName: ['', [Validators.required, this.forbiddenNameValidator(/bob/i)]],
     lastName: ['', [Validators.required, Validators.minLength(5)]], // Validators.minLength(5)
     address: this.formBuilder.group({
       street: [''],
@@ -60,6 +60,13 @@ export class ReactiveFormComponent implements OnInit {
   onSubmit() {
     console.log(`Reactive Form Submitted: ${JSON.stringify(this.reactiveForm.value)}`);
 
+  }
+
+  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const forbidden = nameRe.test(control.value);
+      return forbidden ? { forbiddenName: { value: control.value } } : null;
+    };
   }
 
 }
