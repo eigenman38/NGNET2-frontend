@@ -24,10 +24,14 @@
                     <input id="city" type="text" formControlName="city">
 
                     <label for="state">State: </label>
-                    <input id="state" type="text" formControlName="state">
+                    <!-- <input id="state" type="text" formControlName="state"> -->
+                    <select id="state" formControlName="state">
+                        <option value="" disabled>Choose State</option>
+                        <option *ngFor="let state of states; let i = index" [ngValue]=i>{{state}}</option>
+                    </select>
 
-                    <label for="zip">Zip Code: </label>
-                    <input id="zip" type="text" formControlName="zipcode">
+                    <label for="zipcode">Zip Code: </label>
+                    <input id="zipcode" type="text" formControlName="zipcode">
 
                 </div>
 

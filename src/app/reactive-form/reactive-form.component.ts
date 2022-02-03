@@ -9,14 +9,16 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 })
 export class ReactiveFormComponent implements OnInit {
 
+  states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
+
   reactiveForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
+    firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required, Validators.minLength(5)]], // Validators.minLength(5)
     address: this.formBuilder.group({
       street: [''],
       city: [''],
-      state: [''],
-      zipcode: ['', Validators.pattern(/^\d{5}/)] // match exactly 5 digits Validators.pattern(/^\d{5}/)
+      state: ['', [Validators.required]],
+      zipcode: ['', [Validators.pattern(/^\d{5}/)]] // match exactly 5 digits Validators.pattern(/^\d{5}/)
     }),
     aliases: this.formBuilder.array([
       this.formBuilder.control('')
@@ -40,9 +42,12 @@ export class ReactiveFormComponent implements OnInit {
   patchInValues() {
     this.reactiveForm.patchValue({
       firstName: 'Patch in First Name(Joe)',
+      lastName: 'Patch in First Last Name(Franklin)',
+
       address: {
-        street: '12345 Patched in Street',
-        zip: 12345
+        street: '111 One Way To Go Place',
+        state: 1,
+        zipcode: '12345'
       }
     });
   }
