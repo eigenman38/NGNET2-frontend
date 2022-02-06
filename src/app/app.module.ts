@@ -18,6 +18,7 @@ import { ApiCallListComponent } from './api-call-list/api-call-list.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { FormsHomeComponent } from './forms-home/forms-home.component';
 import { ExponentPipe } from './exponent.pipe';
+import { TemplateFormComponent } from './template-form/template-form.component';
 
 //
 
@@ -30,7 +31,8 @@ import { ExponentPipe } from './exponent.pipe';
     ApiCallListComponent,
     ReactiveFormComponent,
     FormsHomeComponent,
-    ExponentPipe
+    ExponentPipe,
+    TemplateFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

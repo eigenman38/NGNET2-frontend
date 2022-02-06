@@ -9,16 +9,16 @@ import { AbstractControl, FormArray, FormBuilder, ValidationErrors, ValidatorFn,
 })
 export class ReactiveFormComponent implements OnInit {
 
-  states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
+  readonly states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
 
   reactiveForm = this.formBuilder.group({
-    firstName: ['', [Validators.required, this.forbiddenNameValidator(/bob/i)]],
+    firstName: ['', [Validators.required, this.forbiddenNameValidator(/^bob$/)]],
     lastName: ['', [Validators.required, Validators.minLength(5)]], // Validators.minLength(5)
     address: this.formBuilder.group({
       street: [''],
       city: [''],
       state: ['', [Validators.required]],
-      zipcode: ['', [Validators.pattern(/^\d{5}/)]] // match exactly 5 digits Validators.pattern(/^\d{5}/)
+      zipcode: ['', [Validators.pattern(/^\d{5}$/)]] // match exactly 5 digits Validators.pattern(/^\d{5}/)
     }),
     aliases: this.formBuilder.array([
       this.formBuilder.control('')

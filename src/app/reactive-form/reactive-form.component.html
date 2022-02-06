@@ -1,69 +1,61 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <h2>Reactive Form</h2>
+<h2>Reactive Form</h2>
 
-            <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-                <label for="first-name">First Name: </label>
-                <span *ngIf="reactiveForm.get('firstName')?.errors?.required">Required</span>
-                <span *ngIf="reactiveForm.get('firstName')?.errors?.forbiddenName">
-                    {{reactiveForm.get('firstName')?.errors?.forbiddenName.value}} Is Banned</span>
-                <input id="first-name" type="text" formControlName="firstName" required>
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    <label for="first-name">First Name: </label>
+    <span *ngIf="reactiveForm.get('firstName')?.errors?.required">Required</span>
+    <span *ngIf="reactiveForm.get('firstName')?.errors?.forbiddenName">
+        {{reactiveForm.get('firstName')?.errors?.forbiddenName.value}} Is Banned</span>
+    <input id="first-name" type="text" formControlName="firstName" required>
 
 
-                <label for="last-name">Last Name: </label>
-                <span *ngIf="reactiveForm.get('lastName')?.errors?.required">Required</span>
-                <span *ngIf="reactiveForm.get('lastName')?.errors?.minlength">MinLength = 5</span>
-                <input id="last-name" type="text" formControlName="lastName" required>
+    <label for="last-name">Last Name: </label>
+    <span *ngIf="reactiveForm.get('lastName')?.errors?.required">Required</span>
+    <span *ngIf="reactiveForm.get('lastName')?.errors?.minlength">MinLength = 5</span>
+    <input id="last-name" type="text" formControlName="lastName" required>
 
-                <div formGroupName="address">
-                    <h2>Address</h2>
+    <div formGroupName="address">
+        <h2>Address</h2>
 
-                    <label for="street">Street: </label>
-                    <input id="street" type="text" formControlName="street">
+        <label for="street">Street: </label>
+        <input id="street" type="text" formControlName="street">
 
-                    <label for="city">City: </label>
-                    <input id="city" type="text" formControlName="city">
+        <label for="city">City: </label>
+        <input id="city" type="text" formControlName="city">
 
-                    <label for="state">State: </label>
-                    <!-- <input id="state" type="text" formControlName="state"> -->
-                    <select id="state" formControlName="state">
-                        <option value="" disabled>Choose State</option>
-                        <option *ngFor="let state of states; let i = index" [ngValue]=i>{{state}}</option>
-                    </select>
+        <label for="state">State: </label>
 
-                    <label for="zipcode">Zip Code: </label>
-                    <input id="zipcode" type="text" formControlName="zipcode">
+        <select id="state" formControlName="state">
+            <option value="" disabled>Choose State</option>
+            <option *ngFor="let state of states; let i = index" [ngValue]=i>{{state}}</option>
+        </select>
 
-                </div>
-
-                <div formArrayName="aliases">
-                    <h2>Aliases</h2>
-                    <button (click)="addAlias()" type="button">+ Add another alias</button>
-
-                    <div *ngFor="let alias of aliases.controls; let i=index">
-                        <label for="alias-{{ i }}">Alias({{i}}):</label>
-                        <input id="alias-{{ i }}" type="text" [formControlName]="i">
-                    </div>
-                </div>
-
-                <p>Complete the form to enable button.</p>
-
-                <button type="submit" [disabled]="!reactiveForm.valid">Submit</button>
-
-            </form>
-
-            <hr>
-
-            <p>Form Value: {{ reactiveForm.value | json }}</p>
-
-            <p>Form Status: {{ reactiveForm.status }}</p>
-
-            <button (click)="patchInValues()">Patch in Values</button>
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
+        <label for="zipcode">Zip Code: </label>
+        <span *ngIf="reactiveForm.get('address.zipcode')?.errors?.pattern">
+            Exactly 5 Numbers Required</span>
+        <input id="zipcode" type="text" formControlName="zipcode">
 
     </div>
-</div>
+
+    <div formArrayName="aliases">
+        <h2>Aliases</h2>
+        <button (click)="addAlias()" type="button">+ Add another alias</button>
+
+        <div *ngFor="let alias of aliases.controls; let i=index">
+            <label for="alias-{{ i }}">Alias({{i}}):</label>
+            <input id="alias-{{ i }}" type="text" [formControlName]="i">
+        </div>
+    </div>
+
+    <p>Complete the form to enable button.</p>
+
+    <button type="submit" [disabled]="!reactiveForm.valid">Submit</button>
+
+</form>
+
+<hr>
+
+<p>Form Value: {{ reactiveForm.value | json }}</p>
+
+<p>Form Status: {{ reactiveForm.status }}</p>
+
+<button (click)="patchInValues()">Patch in Values</button>

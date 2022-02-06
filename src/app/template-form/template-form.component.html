@@ -1,0 +1,66 @@
+<h2>Template Form</h2>
+
+<form #templateForm="ngForm" (ngSubmit)="onSubmit()">
+    <label for="first-name">First Name: </label>
+
+    <span *ngIf="firstName?.errors?.required">Required</span>
+    <span *ngIf="firstName?.errors?.pattern">
+        {{firstName.value}} Is Banned</span>
+    <input id="first-name" type="text" [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel" required
+        pattern="^(?!bob).+">
+
+    <!-- ^(?!bob).+ is negative look ahead. Returns match = true if bob does not start the line exatly -->
+
+    <label for="last-name">Last Name: </label>
+    <span *ngIf="lastName?.errors?.required">Required</span>
+    <span *ngIf="lastName?.errors?.minlength">MinLength = 5</span>
+    <input id="last-name" type="text" [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel" required
+        minlength="5">
+
+    <div class="form-group">
+        <h2>Address</h2>
+
+        <label for="street">Street: </label>
+        <input id="street" type="text" [(ngModel)]="model.address.street" name="street">
+
+        <label for="city">City: </label>
+        <input id="city" type="text" [(ngModel)]="model.address.city" name="city">
+
+        <label for="state">State: </label>
+        <span *ngIf="zipcode?.errors?.required">
+            State Required</span>
+        <select id="state" [(ngModel)]="model.address.state" name="state">
+            <option value="" disabled>Choose State</option>
+            <option *ngFor="let state of states; let i = index" [ngValue]=i>{{state}}</option>
+        </select>
+
+        <label for="zipcode">Zip Code: </label>
+        <span *ngIf="zipcode?.errors?.pattern">
+            Exactly 5 Numbers Required</span>
+        <input id="zipcode" type="text" [(ngModel)]="model.address.zipcode" name="zipcode" #zipcode="ngModel"
+            pattern="^\d{5}$">
+
+    </div>
+    <div class="form-group">
+        <h2>Aliases</h2>
+        <button (click)="addAlias()" type="button">+ Add another alias</button>
+
+        <div *ngFor="let alias of model.aliases; let i=index">
+            <label for="alias-{{ i }}">Alias({{i}}):</label>
+            <input id="alias-{{ i }}" type="text" name="alias_{{i}}" [(ngModel)]="alias.name">
+        </div>
+    </div>
+
+    <p>Complete the form to enable button.</p>
+
+    <button type="submit" [disabled]="!templateForm.valid">Submit</button>
+
+</form>
+
+<hr>
+
+<p>Form Value: {{ templateForm.value | json }}</p>
+
+<p>Form Status: {{ templateForm.status }}</p>
+
+<button (click)="patchInValues()">Patch in Values</button>
