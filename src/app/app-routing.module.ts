@@ -7,7 +7,7 @@ import { FormsHomeComponent } from './forms-home/forms-home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'weather-forecast-data', component: WeatherForecastDataComponent },
-  { path: 'forms-home-page', component: FormsHomeComponent },
+  { path: 'forms-home-page/:id', component: FormsHomeComponent },
   { path: '**', component: HomeComponent }
 
 ];
