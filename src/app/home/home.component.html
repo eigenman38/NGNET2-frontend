@@ -1,12 +1,13 @@
 <h1>Home</h1>
-<p>Today's Date is {{ todaysDate | date:"MM/dd/yy, h:mm a" }} </p>
-<p>Number of Rows to third power is {{homeNumberOfRowsToDisplay | exponent: 3}}</p>
+<p appHighlight>Today's Date is {{ todaysDate | date:"MM/dd/yy, h:mm a" }} </p>
+<p [appHighlight]="'yellow'">Number of Rows to third power is {{homeNumberOfRowsToDisplay | exponent: 3}}</p>
 
 
-<div>
+
+<div [appHighlight]="'yellow'" defaultColor="violet">
     <button (click)="dec()" title="smaller">Home -</button>
     <button (click)="inc()" title="bigger">Home +</button>
-    <div><label> Max Number of Rows To Display: {{ homeNumberOfRowsToDisplay }}</label></div>
+    <div appHighlight><label> Max Number of Rows To Display: {{ homeNumberOfRowsToDisplay }}</label></div>
 </div>
 <div>
     <app-api-call-list [(numberOfRowsToDisplay)]="homeNumberOfRowsToDisplay"></app-api-call-list>

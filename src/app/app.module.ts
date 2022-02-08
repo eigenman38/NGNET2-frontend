@@ -19,6 +19,7 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { FormsHomeComponent } from './forms-home/forms-home.component';
 import { ExponentPipe } from './exponent.pipe';
 import { TemplateFormComponent } from './template-form/template-form.component';
+import { HighlightDirective } from './highlight.directive';
 
 //
 
@@ -32,7 +33,8 @@ import { TemplateFormComponent } from './template-form/template-form.component';
     ReactiveFormComponent,
     FormsHomeComponent,
     ExponentPipe,
-    TemplateFormComponent
+    TemplateFormComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
