@@ -20,6 +20,7 @@ import { FormsHomeComponent } from './forms-home/forms-home.component';
 import { ExponentPipe } from './exponent.pipe';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { HighlightDirective } from './highlight.directive';
+import { UnlessDirective } from './unless.directive';
 
 //
 
@@ -34,7 +35,8 @@ import { HighlightDirective } from './highlight.directive';
     FormsHomeComponent,
     ExponentPipe,
     TemplateFormComponent,
-    HighlightDirective
+    HighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

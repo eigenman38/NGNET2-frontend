@@ -10,6 +10,8 @@ export class HomeComponent implements OnInit {
 
   private selector: string;
 
+  public condition = false;
+
   public homeNumberOfRowsToDisplay: number = 10;
   public todaysDate = new Date();
 
