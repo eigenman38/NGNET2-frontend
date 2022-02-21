@@ -12,7 +12,7 @@ export class ReactiveFormComponent implements OnInit {
 
   readonly states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
 
-  reactiveForm = this.formBuilder.group({
+  public reactiveForm = this.formBuilder.group({
     firstName: ['', [Validators.required, this.forbiddenNameValidator(/^bob$/)]],
     lastName: ['', [Validators.required, Validators.minLength(5)]], // Validators.minLength(5)
     address: this.formBuilder.group({

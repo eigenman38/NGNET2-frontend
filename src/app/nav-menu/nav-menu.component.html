@@ -18,6 +18,10 @@
             <a class="nav-link text-dark" [routerLink]="['/forms-home-page/12']"
               [queryParams]="{orderBy: 'price'}">Forms</a>
           </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/login']"
+              [queryParams]="{email: 'test@testing.com'}">Login</a>
+          </li>
         </ul>
       </div>
     </div>

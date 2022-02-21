@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'weather-forecast-data', component: WeatherForecastDataComponent },
   { path: 'forms-home-page/:id', component: FormsHomeComponent },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: '**', component: HomeComponent }
 
 ];

@@ -1,0 +1,22 @@
+<h2>Login Form</h2>
+
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="email-address">Email Address: </label>
+    <span *ngIf="loginForm.get('emailAddress')?.errors?.required">Required</span>
+    <span *ngIf="loginForm.get('emailAddress')?.errors?.email">Needs to Be Valid Email</span>
+    <input id="email-address" type="email" formControlName="emailAddress">
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password">
+    <span *ngIf="loginForm.get('password')?.dirty && 
+    loginForm.get('password')?.errors?.required">Required</span>
+
+    <div>
+        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+    </div>
+</form>
+
+<p>Form Value: {{ loginForm.value | json }}</p>
+
+<p>Form Status: {{ loginForm.status }}</p>
