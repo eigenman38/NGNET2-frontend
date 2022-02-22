@@ -21,6 +21,7 @@ import { ExponentPipe } from './exponent.pipe';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { HighlightDirective } from './highlight.directive';
 import { UnlessDirective } from './unless.directive';
+import { authenticationReducer } from './state/authentication.reducer';
 
 //
 
@@ -44,7 +45,11 @@ import { UnlessDirective } from './unless.directive';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ weatherForecastData: weatherForecastReducer, allApiCallLogs: apiCallLogReducer }),
+    StoreModule.forRoot({
+      weatherForecastData: weatherForecastReducer,
+      allApiCallLogs: apiCallLogReducer,
+      authenticationModel: authenticationReducer
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
