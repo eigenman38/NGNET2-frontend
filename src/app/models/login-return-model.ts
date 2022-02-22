@@ -1,3 +1,3 @@
 export interface LoginReturnModel {
-    jwt: string;
+    jwt: string | null;
 }

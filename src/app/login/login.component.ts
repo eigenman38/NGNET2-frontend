@@ -31,16 +31,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log(`Login Form Submitted: ${JSON.stringify(this.loginForm.value)}`);
 
-    this.loginApiService.execute(this.loginForm.value).pipe(
-      catchError(x => {
-        return EMPTY;
-
-      })
-    )
+    this.loginApiService.execute(this.loginForm.value)
       .subscribe(x => {
 
-        if (x?.jwt.length > 0)
+        if (x?.jwt && x.jwt.length > 0)
           this.router.navigate(['']);
+        else {
+          console.log(`LoginComponent: Login Failed`);
+        }
 
 
 

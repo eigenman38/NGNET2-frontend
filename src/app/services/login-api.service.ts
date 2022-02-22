@@ -18,6 +18,9 @@ export class LoginApiService extends PostApiBaseCallService {
   }
 
   execute(loginModel: LoginModel): Observable<LoginReturnModel> {
+
+    let returnFail: LoginReturnModel = { jwt: null };
+
     return this.httpClient.post<LoginReturnModel>(this.baseUrl + 'login', loginModel).
       pipe(
         tap(x => {
@@ -27,9 +30,12 @@ export class LoginApiService extends PostApiBaseCallService {
         catchError(x => {
           console.error(`LoginApiService: Error: ${JSON.stringify(x)}`);
           //return EMPTY;
-          return throwError(() => new Error('HTTP: ERROR'));
+          //return throwError(() => new Error('HTTP: ERROR'));
+          return of(returnFail);
 
         })
       );
   }
+
+
 }
