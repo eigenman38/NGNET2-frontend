@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
+import { LogApiData } from '../models/log-api-data';
 import { AppState } from '../state/app.state';
 import { PostApiBaseCallService } from './base/post-api-base-call.service';
 
@@ -14,7 +15,7 @@ export class LogApiCallService extends PostApiBaseCallService {
         super(httpClient, store, baseUrl, 'logapicall', 'LogApiCallService');
     }
 
-    execute<LogApiData>(logApiData: LogApiData): Observable<LogApiData> {
+    execute(logApiData: LogApiData): Observable<LogApiData> {
         return this.httpClient.post<LogApiData>(this.baseUrl + 'logapicall', logApiData).
             pipe(
                 tap(x => {
