@@ -5,6 +5,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginApiService } from './services/api-services/login-api.service';
+import { LoginServiceService } from './services/logic-services/login-service.service';
 
 
 @NgModule({
@@ -16,6 +17,9 @@ import { LoginApiService } from './services/api-services/login-api.service';
     LoginRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [LoginApiService]
+  providers: [
+    LoginApiService,
+    LoginServiceService
+  ]
 })
 export class LoginModule { }

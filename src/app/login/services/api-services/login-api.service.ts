@@ -31,14 +31,8 @@ export class LoginApiService extends PostApiBaseCallService {
         tap(x => {
 
 
-        }),
-        catchError(x => {
-          console.error(`LoginApiService: Error: ${JSON.stringify(x)}`);
-          //return EMPTY;
-          //return throwError(() => new Error('HTTP: ERROR'));
-          return of(returnFail);
-
         })
+
       );
   }
 

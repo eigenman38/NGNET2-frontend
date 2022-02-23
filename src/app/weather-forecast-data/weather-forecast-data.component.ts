@@ -23,6 +23,7 @@ export class WeatherForecastDataComponent implements OnInit {
   constructor(private getWeatherForecastDataService: GetWeatherForecastDataService,
     private store: Store<AppState>) {
 
+
   }
 
   ngOnInit(): void {
