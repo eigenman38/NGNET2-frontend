@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { WeatherForecastData } from '../models/weather-forecast-data';
-import { GetWeatherForecastDataService } from '../services/get-weather-forecast-data.service';
+import { GetWeatherForecastDataService } from '../services/api-services/get-weather-forecast-data.service';
 import { AppState } from '../state/app.state';
 import { retrievedWeatherForecastData } from '../state/weather-forecast.actions';
 import { selectWeatherForecastData } from '../state/weather-forecast.selectors';

@@ -2,11 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
-import { AppState } from '../state/app.state';
-import { LogApiData } from '../models/log-api-data';
-import { WeatherForecastData } from '../models/weather-forecast-data';
-import { ApiBaseCallService } from './base/api-base-call.service';
-import { logApiCall } from '../state/api-call-log.actions';
+import { WeatherForecastData } from 'src/app/models/weather-forecast-data';
+import { logApiCall } from 'src/app/state/api-call-log.actions';
+import { AppState } from 'src/app/state/app.state';
+import { ApiBaseCallService } from '../base/api-base-call.service';
 
 @Injectable({ providedIn: 'root' })
 export class GetWeatherForecastDataService extends ApiBaseCallService {

@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { GetApiBaseCallService } from '../services/base/get-api-base-call.service';
-import { GetAllApiCallLogs } from '../services/get-all-api-call-logs.service';
-import { LogApiCallService } from '../services/log-api-call.service';
+import { GetAllApiCallLogs } from '../services/api-services/get-all-api-call-logs.service';
+import { LogApiCallService } from '../services/api-services/log-api-call.service';
 import { apiCallLogged, allApiCallLogsRetrieved } from '../state/api-call-log.actions';
 import { AppState } from '../state/app.state';
 
