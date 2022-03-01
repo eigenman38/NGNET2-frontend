@@ -1,4 +1,5 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { ComponentBase } from '../component-base';
 
 
 
@@ -6,17 +7,16 @@ import { Component, ElementRef, Inject, OnInit } from '@angular/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends ComponentBase implements OnInit {
 
-  private selector: string;
 
   public condition = false;
 
   public homeNumberOfRowsToDisplay: number = 10;
   public todaysDate = new Date();
 
-  constructor(private elementRef: ElementRef) {
-    this.selector = elementRef.nativeElement.tagName;
+  constructor(protected elementRef: ElementRef) {
+    super(elementRef);
   }
 
   ngOnInit(): void {

@@ -7,17 +7,14 @@ import { LoginApiService } from './services/api-services/login-api.service';
 import { AppState } from '../state/app.state';
 import { removedAuthentication, retrievedLoginReturnModel } from '../state/authentication.actions';
 import { LoginServiceService } from './services/logic-services/login-service.service';
+import { ComponentBase } from '../component-base';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-
-  private destroyed$: Subject<boolean> = new Subject<boolean>();
-  private selector: string;
-
+export class LoginComponent extends ComponentBase implements OnInit, OnDestroy {
 
 
   public loginForm = this.formBuilder.group({
@@ -27,9 +24,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
     private router: Router, private loginServiceService: LoginServiceService,
-    private elementRef: ElementRef
+    protected elementRef: ElementRef
   ) {
-    this.selector = elementRef.nativeElement.tagName;
+    super(elementRef);
 
   }
 
@@ -44,9 +41,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
-    console.log(`ngOnDestroy: ${this.selector}`);
+
+    this.destroy();
 
   }
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ComponentBase } from '../component-base';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './reactive-form.component.html',
   styleUrls: ['./reactive-form.component.css']
 })
-export class ReactiveFormComponent implements OnInit {
+export class ReactiveFormComponent extends ComponentBase implements OnInit {
 
   readonly states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
 
@@ -33,9 +34,15 @@ export class ReactiveFormComponent implements OnInit {
     return this.reactiveForm.get('aliases') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor(protected elementRef: ElementRef, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) {
+    super(elementRef);
+
+  }
 
   ngOnInit(): void {
+    console.log(`ngOnInit: ${this.selector}`);
+
+
     this.activatedRoute.queryParamMap.subscribe((params) => {
 
 

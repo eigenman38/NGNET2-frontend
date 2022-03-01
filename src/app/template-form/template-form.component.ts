@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ComponentBase } from '../component-base';
 import { TemplateFormModel } from '../models/template-form-model';
 
 @Component({
@@ -7,16 +8,20 @@ import { TemplateFormModel } from '../models/template-form-model';
   templateUrl: './template-form.component.html',
   styleUrls: ['./template-form.component.css']
 })
-export class TemplateFormComponent implements OnInit {
+export class TemplateFormComponent extends ComponentBase implements OnInit {
 
   readonly states: string[] = ["Colorado", "Pennsylvania", "Florida", "Texas"];
 
   model: TemplateFormModel = { address: { state: "" }, aliases: [{ name: '' }] };
   alias: string = '';
 
-  constructor() { }
+  constructor(protected elementRef: ElementRef) {
+    super(elementRef);
+  }
 
   ngOnInit(): void {
+    console.log(`ngOnInit: ${this.selector}`);
+
   }
 
   addAlias() {
