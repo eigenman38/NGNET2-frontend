@@ -22,6 +22,8 @@ import { TemplateFormComponent } from './template-form/template-form.component';
 import { HighlightDirective } from './highlight.directive';
 import { UnlessDirective } from './unless.directive';
 import { authenticationReducer } from './state/authentication.reducer';
+import { NewsletterComponent } from './forms-home/newsletter/newsletter.component';
+import { PasswordRecoveryComponent } from './forms-home/password-recovery/password-recovery.component';
 
 //
 
@@ -37,7 +39,9 @@ import { authenticationReducer } from './state/authentication.reducer';
     ExponentPipe,
     TemplateFormComponent,
     HighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    NewsletterComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
