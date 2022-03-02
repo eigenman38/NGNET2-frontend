@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormWrapperTrackingService } from 'src/app/services/composition-services/form-wrapper-tracking.service';
-import { FormWrapper, FORM_WRAPPER } from 'src/app/services/composition-services/form-wrapper.interface';
+import { FormWrapperInterface, FORM_WRAPPER_INTERFACE } from 'src/app/services/composition-services/form-wrapper.interface';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { FormWrapper, FORM_WRAPPER } from 'src/app/services/composition-services
   styleUrls: ['./password-recovery.component.css'],
   providers: [
     {
-      provide: FORM_WRAPPER,
+      provide: FORM_WRAPPER_INTERFACE,
       useClass: FormWrapperTrackingService,
     },
   ],
@@ -18,7 +18,7 @@ import { FormWrapper, FORM_WRAPPER } from 'src/app/services/composition-services
 export class PasswordRecoveryComponent {
   myform: FormGroup;
   errors: string[] = [];
-  constructor(@Inject(FORM_WRAPPER) private formWrapper: FormWrapper) {
+  constructor(@Inject(FORM_WRAPPER_INTERFACE) private formWrapper: FormWrapperInterface) {
     this.myform = formWrapper.myform;
   }
   save() {

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { FormWrapperBase } from 'src/app/services/composition-services/form-wrapper-base.service';
 import { FormWrapperService } from 'src/app/services/composition-services/form-wrapper.service';
-import { FormWrapper, FORM_WRAPPER } from '../../services/composition-services/form-wrapper.interface'
 
 
 @Component({
@@ -9,7 +9,7 @@ import { FormWrapper, FORM_WRAPPER } from '../../services/composition-services/f
   templateUrl: './newsletter.component.html',
   providers: [
     {
-      provide: FORM_WRAPPER,
+      provide: FormWrapperBase,
       useClass: FormWrapperService,
     },
   ],
@@ -17,7 +17,7 @@ import { FormWrapper, FORM_WRAPPER } from '../../services/composition-services/f
 export class NewsletterComponent {
   myform: FormGroup;
   errors: string[] = [];
-  constructor(@Inject(FORM_WRAPPER) private formWrapper: FormWrapper) {
+  constructor(private formWrapper: FormWrapperBase) {
     this.myform = formWrapper.myform;
   }
   save() {
