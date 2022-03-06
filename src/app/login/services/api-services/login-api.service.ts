@@ -7,6 +7,7 @@ import { LoginReturnModel } from '../../../models/login-return-model';
 import { AppState } from '../../../state/app.state';
 import { PostApiBaseCallService } from '../../../services/base/post-api-base-call.service';
 import { LoginModule } from '../../login.module';
+import { logApiCall } from 'src/app/state/api-call-log.actions';
 
 @Injectable() // for lazy loaded modules, think this is only way to avoid loading symbols
 //as specifying the module here doesn't work
@@ -30,7 +31,29 @@ export class LoginApiService extends PostApiBaseCallService {
       pipe(
         tap(x => {
 
+          let logApiData = {
+            apiCall: this.fullApiCall,
+            recordsReturned: 1,
+            serviceThatMadeCall: this.serviceThatMadeCall,
+            callerDateTime: new Date(),
+            success: true
+          }
 
+          this.store.dispatch(logApiCall({ logApiData }));
+
+
+        }),
+        catchError(x => {
+
+          let logApiData = {
+            apiCall: this.fullApiCall,
+            recordsReturned: 0,
+            serviceThatMadeCall: this.serviceThatMadeCall,
+            callerDateTime: new Date(),
+            success: false
+          }
+          this.store.dispatch(logApiCall({ logApiData }));
+          return EMPTY;
         })
 
       );

@@ -11,7 +11,8 @@ const PROXY_CONFIG = [
     context: [
       "/weatherforecast",
       "/logapicall",
-      "/getallapicalllogs"
+      "/getallapicalllogs",
+      "/login"
     ],
     target: target,
     secure: false
