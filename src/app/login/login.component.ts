@@ -8,6 +8,7 @@ import { AppState } from '../state/app.state';
 import { removedAuthentication, retrievedLoginReturnModel } from '../state/authentication.actions';
 import { LoginServiceService } from './services/logic-services/login-service.service';
 import { ComponentBase } from '../component-base';
+import { AuthenticatedService } from '../services/logic-services/authenticated.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent extends ComponentBase implements OnInit, OnDestroy {
   });
 
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
-    private router: Router, private loginServiceService: LoginServiceService,
+    private router: Router, private loginServiceService: LoginServiceService, private authenticatedService: AuthenticatedService,
     protected elementRef: ElementRef
   ) {
     super(elementRef);
@@ -58,7 +59,7 @@ export class LoginComponent extends ComponentBase implements OnInit, OnDestroy {
     //so here we want to subscribe to the selector
     //and maybe this goes into the logic service which I guess turns it into a facade.
 
-    this.loginServiceService.isLoggedIn()
+    this.authenticatedService.authenticated()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(x => {
 

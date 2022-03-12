@@ -6,7 +6,6 @@ import { LoginReturnModel } from 'src/app/models/login-return-model';
 import { LogicServiceBase } from 'src/app/services/base/logic-service-base.service';
 import { AppState } from 'src/app/state/app.state';
 import { retrievedLoginReturnModel, removedAuthentication } from 'src/app/state/authentication.actions';
-import { selectIsLoggedIn } from 'src/app/state/authentication.selectors';
 import { LoginApiService } from '../api-services/login-api.service';
 
 @Injectable(
@@ -58,9 +57,5 @@ export class LoginServiceService extends LogicServiceBase {
 
   }
 
-  isLoggedIn(): Observable<boolean> {
 
-    return this.store.select(selectIsLoggedIn);
-
-  }
 }
