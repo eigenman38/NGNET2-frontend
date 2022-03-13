@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
-import { map, mergeMap, catchError, tap } from 'rxjs/operators';
-import { GetApiBaseCallService } from '../services/base/get-api-base-call.service';
-import { GetAllApiCallLogs } from '../services/api-services/get-all-api-call-logs.service';
-import { LogApiCallService } from '../services/api-services/log-api-call.service';
-import { apiCallLogged, allApiCallLogsRetrieved } from '../state/api-call-log.actions';
-import { AppState } from '../state/app.state';
+import { mergeMap, tap } from 'rxjs/operators';
+import { apiCallLogged } from '../state/api-call-log.actions';
+import { GetAllApiCallLogsLogicService } from '../services/logic-services/api-call-log-logic.service';
 
 @Injectable()
 export class GetAllApiCallLogsEffect {
@@ -18,14 +13,8 @@ export class GetAllApiCallLogsEffect {
             console.log(`GetAllApiCallLogsEffect`);
 
         }),
-        mergeMap(action => this.getAllApiCallLogs.execute().
-            pipe(
-                tap(x => {
-                    if (x)
-                        this.store.dispatch(allApiCallLogsRetrieved({ logApiData: x }));
+        mergeMap((action) => this.getAllApiCallLogsLogicService.execute()
 
-                })//tap
-            )//pipe
         ),//mergeMap
 
     ),//pipe
@@ -37,8 +26,7 @@ export class GetAllApiCallLogsEffect {
 
     constructor(
         private actions$: Actions,
-        private getAllApiCallLogs: GetAllApiCallLogs,
-        private store: Store<AppState>
+        private getAllApiCallLogsLogicService: GetAllApiCallLogsLogicService
     ) { }
 
 }//class

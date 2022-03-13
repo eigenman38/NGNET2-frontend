@@ -1,14 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { catchError, EMPTY, Subject, takeUntil } from 'rxjs';
-import { LoginApiService } from './services/api-services/login-api.service';
-import { AppState } from '../state/app.state';
-import { removedAuthentication, retrievedLoginReturnModel } from '../state/authentication.actions';
+import { takeUntil } from 'rxjs';
 import { LoginServiceService } from './services/logic-services/login-service.service';
 import { ComponentBase } from '../component-base';
-import { AuthenticatedService } from '../services/logic-services/authenticated.service';
+import { AuthenticatedLogicService } from '../services/logic-services/authenticated-logic.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +20,7 @@ export class LoginComponent extends ComponentBase implements OnInit, OnDestroy {
   });
 
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
-    private router: Router, private loginServiceService: LoginServiceService, private authenticatedService: AuthenticatedService,
+    private router: Router, private loginServiceService: LoginServiceService, private authenticatedLogicService: AuthenticatedLogicService,
     protected elementRef: ElementRef
   ) {
     super(elementRef);
@@ -59,7 +55,7 @@ export class LoginComponent extends ComponentBase implements OnInit, OnDestroy {
     //so here we want to subscribe to the selector
     //and maybe this goes into the logic service which I guess turns it into a facade.
 
-    this.authenticatedService.authenticated()
+    this.authenticatedLogicService.execute()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(x => {
 

@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
-import { LogApiCallService } from '../services/api-services/log-api-call.service';
-import { logApiCall, apiCallLogged } from '../state/api-call-log.actions';
-import { AppState } from '../state/app.state';
+import { LogApiCallLogicService } from '../services/logic-services/log-api-call-logic.service';
+import { logApiCall } from '../state/api-call-log.actions';
 
 @Injectable()
 export class LogApiCallEffect {
@@ -16,14 +13,8 @@ export class LogApiCallEffect {
             console.log(`LogApiCallEffect`);
 
         }),
-        mergeMap(action => this.logApiCallService.execute(action.logApiData).
-            pipe(
-                tap(x => {
-                    if (x)
-                        this.store.dispatch(apiCallLogged());
+        mergeMap(action => this.logApiCallLogicService.execute(action.logApiData)
 
-                })//tap
-            )//pipe
         ),//mergeMap
 
     ),//pipe
@@ -35,8 +26,7 @@ export class LogApiCallEffect {
 
     constructor(
         private actions$: Actions,
-        private logApiCallService: LogApiCallService,
-        private store: Store<AppState>
+        private logApiCallLogicService: LogApiCallLogicService
     ) { }
 
 }//class

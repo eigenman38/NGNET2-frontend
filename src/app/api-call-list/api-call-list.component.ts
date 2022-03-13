@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectAllApiCallLogs } from '../state/api-call-log.selectors';
-import { AppState } from '../state/app.state';
+import { Observable } from 'rxjs';
+import { LogApiData } from '../models/log-api-data';
+import { GetAllApiCallLogsLogicService } from '../services/logic-services/api-call-log-logic.service';
 
 @Component({
   selector: 'app-api-call-list',
@@ -12,10 +12,12 @@ export class ApiCallListComponent implements OnInit, OnChanges {
   @Input() numberOfRowsToDisplay: number = 10;
   @Output() numberOfRowsToDisplayChange = new EventEmitter<number>();
 
-  public apiCallLogs$ = this.store.select(selectAllApiCallLogs);
+  public apiCallLogs$: Observable<LogApiData[]>;
 
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private getAllApiCallLogsLogicService: GetAllApiCallLogsLogicService) {
+    this.apiCallLogs$ = this.getAllApiCallLogsLogicService.getAllApiCallLogs();
+  }
 
 
   ngOnChanges(changes: SimpleChanges): void {

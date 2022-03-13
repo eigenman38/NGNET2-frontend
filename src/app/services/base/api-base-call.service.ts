@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.state';
 
 export abstract class ApiBaseCallService {
 
 
 
 
-    constructor(private httpClientBase: HttpClient, private storeBase: Store<AppState>,
+    constructor(private httpClientBase: HttpClient,
         private baseUrlBase: string, private apiCall: string, protected serviceThatMadeCall: string) { };
 
 

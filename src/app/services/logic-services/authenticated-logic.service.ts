@@ -8,13 +8,13 @@ import { LogicServiceBase } from '../base/logic-service-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticatedService extends LogicServiceBase {
+export class AuthenticatedLogicService extends LogicServiceBase {
 
   constructor(private store: Store<AppState>) {
     super();
   }
 
-  public authenticated(): Observable<boolean> {
+  public execute(): Observable<boolean> {
     return this.store.select(selectIsLoggedIn);
   }
 }

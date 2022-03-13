@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, tap, catchError, EMPTY, of, throwError } from 'rxjs';
+import { Observable, tap, catchError, EMPTY } from 'rxjs';
 import { LoginModel } from '../../../models/login-model';
 import { LoginReturnModel } from '../../../models/login-return-model';
 import { AppState } from '../../../state/app.state';
 import { PostApiBaseCallService } from '../../../services/base/post-api-base-call.service';
-import { LoginModule } from '../../login.module';
 import { logApiCall } from 'src/app/state/api-call-log.actions';
 
 @Injectable() // for lazy loaded modules, think this is only way to avoid loading symbols
@@ -20,7 +19,7 @@ export class LoginApiService extends PostApiBaseCallService {
 
   constructor(private httpClient: HttpClient, private store: Store<AppState>,
     @Inject('BASE_URL') private baseUrl: string) {
-    super(httpClient, store, baseUrl, 'login', 'LoginApiService');
+    super(httpClient, baseUrl, 'login', 'LoginApiService');
   }
 
   execute(loginModel: LoginModel): Observable<LoginReturnModel> {

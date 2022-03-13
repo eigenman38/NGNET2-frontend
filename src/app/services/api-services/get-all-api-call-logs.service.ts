@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { catchError, EMPTY, Observable, of, tap } from 'rxjs';
+import { catchError, EMPTY, Observable, tap } from 'rxjs';
 import { LogApiData } from 'src/app/models/log-api-data';
-import { AppState } from 'src/app/state/app.state';
 import { GetApiBaseCallService } from '../base/get-api-base-call.service';
 
 
 
 @Injectable({ providedIn: 'root' })
-export class GetAllApiCallLogs extends GetApiBaseCallService {
+export class GetAllApiCallLogsService extends GetApiBaseCallService {
 
 
 
-    constructor(private httpClient: HttpClient, private store: Store<AppState>,
+    constructor(private httpClient: HttpClient,
         @Inject('BASE_URL') private baseUrl: string) {
-        super(httpClient, store, baseUrl, 'getallapicalllogs', 'GetAllApiCallLogs');
+        super(httpClient, baseUrl, 'getallapicalllogs', 'GetAllApiCallLogs');
     }
 
     execute(): Observable<LogApiData[]> {

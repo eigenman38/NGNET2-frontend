@@ -14,7 +14,7 @@ export class GetWeatherForecastDataService extends ApiBaseCallService {
 
     constructor(private httpClient: HttpClient, private store: Store<AppState>,
         @Inject('BASE_URL') private baseUrl: string) {
-        super(httpClient, store, baseUrl, 'weatherforecast', 'GetWeatherForecastDataService');
+        super(httpClient, baseUrl, 'weatherforecast', 'GetWeatherForecastDataService');
     }
 
     execute(): Observable<WeatherForecastData[]> {
