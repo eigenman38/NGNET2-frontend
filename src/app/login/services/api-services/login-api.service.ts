@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, tap, catchError, EMPTY } from 'rxjs';
 import { LoginModel } from '../../../models/login-model';
 import { LoginReturnModel } from '../../../models/login-return-model';
-import { AppState } from '../../../state/app.state';
 import { PostApiBaseCallService } from '../../../services/base/post-api-base-call.service';
 import { logApiCall } from 'src/app/state/api-call-log.actions';
+import { ApiCallLogFacadeService } from 'src/app/state/api-call-log-facade.service';
 
 @Injectable() // for lazy loaded modules, think this is only way to avoid loading symbols
 //as specifying the module here doesn't work
@@ -17,7 +16,7 @@ import { logApiCall } from 'src/app/state/api-call-log.actions';
 
 export class LoginApiService extends PostApiBaseCallService {
 
-  constructor(private httpClient: HttpClient, private store: Store<AppState>,
+  constructor(private httpClient: HttpClient, private apiCallLogFacadeService: ApiCallLogFacadeService,
     @Inject('BASE_URL') private baseUrl: string) {
     super(httpClient, baseUrl, 'login', 'LoginApiService');
   }
@@ -38,7 +37,7 @@ export class LoginApiService extends PostApiBaseCallService {
             success: true
           }
 
-          this.store.dispatch(logApiCall({ logApiData }));
+          this.apiCallLogFacadeService.logApiCall(logApiData);
 
 
         }),
@@ -51,7 +50,8 @@ export class LoginApiService extends PostApiBaseCallService {
             callerDateTime: new Date(),
             success: false
           }
-          this.store.dispatch(logApiCall({ logApiData }));
+          this.apiCallLogFacadeService.logApiCall(logApiData);
+
           return EMPTY;
         })
 

@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { WeatherForecastData } from '../models/weather-forecast-data';
 import { GetWeatherForecastDataService } from '../services/api-services/get-weather-forecast-data.service';
-import { AppState } from '../state/app.state';
-import { retrievedWeatherForecastData } from '../state/weather-forecast.actions';
-import { selectWeatherForecastData } from '../state/weather-forecast.selectors';
+import { WeatherForecastFacadeService } from '../state/weather-forecast-facade.service';
 
 
 @Component({
@@ -14,20 +10,19 @@ import { selectWeatherForecastData } from '../state/weather-forecast.selectors';
 export class WeatherForecastDataComponent implements OnInit {
 
 
-  public weatherForecastData$ = this.store.select(selectWeatherForecastData);
+  public weatherForecastData$ = this.weatherForecastFacadeService.selectWeatherForecastData();
 
 
-
-
-
-  constructor(private getWeatherForecastDataService: GetWeatherForecastDataService,
-    private store: Store<AppState>) {
+  constructor(private weatherForecastFacadeService: WeatherForecastFacadeService,
+    private getWeatherForecastDataService: GetWeatherForecastDataService) {
 
 
   }
 
   ngOnInit(): void {
-    this.getWeatherForecastDataService.execute().subscribe(x => this.store.dispatch(retrievedWeatherForecastData({ weatherForecastData: x })));
+    //todo: dispatch belongs in the logic service
+    this.getWeatherForecastDataService.execute()
+      .subscribe(weatherForecastData => this.weatherForecastFacadeService.retrievedWeatherForecastData(weatherForecastData));
   }
 }
 

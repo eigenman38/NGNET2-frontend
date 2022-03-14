@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { AppState } from 'src/app/state/app.state';
-import { selectIsLoggedIn } from 'src/app/state/authentication.selectors';
+import { map, mergeMap, Observable } from 'rxjs';
+import { AuthenticationFacadeService } from 'src/app/state/authentication-facade.service';
 import { LogicServiceBase } from '../base/logic-service-base.service';
 
 @Injectable({
@@ -10,11 +8,24 @@ import { LogicServiceBase } from '../base/logic-service-base.service';
 })
 export class AuthenticatedLogicService extends LogicServiceBase {
 
-  constructor(private store: Store<AppState>) {
+  constructor(private authenticationFacadeService: AuthenticationFacadeService) {
     super();
   }
 
   public execute(): Observable<boolean> {
-    return this.store.select(selectIsLoggedIn);
+
+    return this.authenticationFacadeService.selectAuthenticationModel()
+      .pipe(
+        map(x => {
+
+          if (x?.loginReturnModel?.jwt != null && x.loginReturnModel.jwt.length > 0)
+            return true;
+
+          else
+            return false;
+        })//map
+      )//pipe
   }
+
+
 }

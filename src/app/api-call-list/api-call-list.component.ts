@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 import { Observable } from 'rxjs';
 import { LogApiData } from '../models/log-api-data';
 import { GetAllApiCallLogsLogicService } from '../services/logic-services/api-call-log-logic.service';
+import { ApiCallLogFacadeService } from '../state/api-call-log-facade.service';
 
 @Component({
   selector: 'app-api-call-list',
@@ -12,11 +13,11 @@ export class ApiCallListComponent implements OnInit, OnChanges {
   @Input() numberOfRowsToDisplay: number = 10;
   @Output() numberOfRowsToDisplayChange = new EventEmitter<number>();
 
-  public apiCallLogs$: Observable<LogApiData[]>;
+  public apiCallLogs$ = this.apiCallLogFacadeService.selectAllApiCallLogs();
 
 
-  constructor(private getAllApiCallLogsLogicService: GetAllApiCallLogsLogicService) {
-    this.apiCallLogs$ = this.getAllApiCallLogsLogicService.getAllApiCallLogs();
+  constructor(private apiCallLogFacadeService: ApiCallLogFacadeService,
+    private getAllApiCallLogsLogicService: GetAllApiCallLogsLogicService) {
   }
 
 

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { tap, catchError, of, Observable } from 'rxjs';
+import { tap, catchError, of } from 'rxjs';
 import { LoginModel } from 'src/app/models/login-model';
 import { LoginReturnModel } from 'src/app/models/login-return-model';
 import { LogicServiceBase } from 'src/app/services/base/logic-service-base.service';
-import { AppState } from 'src/app/state/app.state';
-import { retrievedLoginReturnModel, removedAuthentication } from 'src/app/state/authentication.actions';
+import { AuthenticationFacadeService } from 'src/app/state/authentication-facade.service';
 import { LoginApiService } from '../api-services/login-api.service';
 
 @Injectable(
@@ -20,7 +18,7 @@ export class LoginServiceService extends LogicServiceBase {
 
 
   constructor(private loginApiService: LoginApiService,
-    private store: Store<AppState>) {
+    private authenticationFacadeService: AuthenticationFacadeService) {
     super();
   }
 
@@ -43,14 +41,14 @@ export class LoginServiceService extends LogicServiceBase {
 
         })
       )
-      .subscribe(x => {
+      .subscribe(loginReturnModel => {
 
-        if (x?.jwt && x.jwt.length > 0) {
-          this.store.dispatch(retrievedLoginReturnModel({ loginReturnModel: x }));
+        if (loginReturnModel?.jwt && loginReturnModel.jwt.length > 0) {
+          this.authenticationFacadeService.retrievedLoginReturnModel(loginReturnModel);
           console.log(`LoginServiceService: Login Succeeded`);
         }
         else {
-          this.store.dispatch(removedAuthentication());
+          this.authenticationFacadeService.removedAuthentication();
           console.error(`LoginServiceService: Login Failed`);
         }
       })

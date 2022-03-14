@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
 import { LogApiData } from 'src/app/models/log-api-data';
-import { allApiCallLogsRetrieved } from 'src/app/state/api-call-log.actions';
-import { selectAllApiCallLogs } from 'src/app/state/api-call-log.selectors';
-import { AppState } from 'src/app/state/app.state';
+import { ApiCallLogFacadeService } from 'src/app/state/api-call-log-facade.service';
 import { GetAllApiCallLogsService } from '../api-services/get-all-api-call-logs.service';
 import { LogicServiceBase } from '../base/logic-service-base.service';
 
@@ -13,7 +10,7 @@ import { LogicServiceBase } from '../base/logic-service-base.service';
 })
 export class GetAllApiCallLogsLogicService extends LogicServiceBase {
 
-  constructor(private store: Store<AppState>, private getAllApiCallLogsService: GetAllApiCallLogsService) {
+  constructor(private apiCallLogFacadeService: ApiCallLogFacadeService, private getAllApiCallLogsService: GetAllApiCallLogsService) {
     super();
   }
 
@@ -24,17 +21,13 @@ export class GetAllApiCallLogsLogicService extends LogicServiceBase {
       .pipe(
         tap(logApiData => {
           if (logApiData)
-            this.store.dispatch(allApiCallLogsRetrieved({ logApiData: logApiData }));
+            this.apiCallLogFacadeService.allApiCallLogsRetrieved(logApiData);
 
         })//tap
       )//pipe
 
   }
 
-  // selectors
-  public getAllApiCallLogs(): Observable<LogApiData[]> {
-    return this.store.select(selectAllApiCallLogs);
-  }
 
 
 }
